@@ -179,8 +179,8 @@ class ProjectController extends Controller {
 
     public function getStartProjectByMonth($month, $year) {
         $sql = "SELECT (SELECT COUNT(id) FROM project AS p
-WHERE MONTH(p.start_date) = $month AND YEAR(p.start_date) = $year) AS start_date_count, (SELECT COUNT(id) FROM project AS p
-WHERE MONTH(p.actual_start_date) = $month AND YEAR(p.actual_start_date) = $year) AS actual_start_date_count FROM project";
+WHERE MONTH(p.start_date) <= $month AND YEAR(p.start_date) = $year) AS start_date_count, (SELECT COUNT(id) FROM project AS p
+WHERE MONTH(p.actual_start_date) <= $month AND YEAR(p.actual_start_date) = $year) AS actual_start_date_count FROM project";
         $connection = Yii::app()->db;
         $command = $connection->createCommand($sql);
         $results = $command->queryAll();
@@ -189,8 +189,8 @@ WHERE MONTH(p.actual_start_date) = $month AND YEAR(p.actual_start_date) = $year)
 
     public function getEndProjectByMonth($month, $year) {
         $sql = "SELECT (SELECT COUNT(id) FROM project AS p
-WHERE MONTH(p.end_date) = $month AND YEAR(p.end_date) = $year) AS end_date_count, (SELECT COUNT(id) FROM project AS p
-WHERE MONTH(p.actual_end_date) = $month AND YEAR(p.actual_end_date) = $year) AS actual_end_date_count FROM project";
+WHERE MONTH(p.end_date) <= $month AND YEAR(p.end_date) = $year) AS end_date_count, (SELECT COUNT(id) FROM project AS p
+WHERE MONTH(p.actual_end_date) <= $month AND YEAR(p.actual_end_date) = $year) AS actual_end_date_count FROM project";
         $connection = Yii::app()->db;
         $command = $connection->createCommand($sql);
         $results = $command->queryAll();
